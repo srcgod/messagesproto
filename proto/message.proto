@@ -22,10 +22,8 @@ message DeleteMessageRequest {
     string id = 1;
 }
 
-// TODO: fix this logic (user_id, id musnt be change)
 message UpdateMessageRequest {
     string id = 1;
-    int64 user_id = 2;
     string content = 3;
     google.protobuf.FieldMask update_mask = 4;
 }
@@ -49,6 +47,7 @@ message ListMessageResponse {
 message CreateMessageRequest {
     int64 user_id = 1;
     string content = 2;
+    string chat_id = 3;
 }
 message CreateMessageResponse {
     Message msg = 1;

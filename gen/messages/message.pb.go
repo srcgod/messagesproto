@@ -103,11 +103,9 @@ func (x *DeleteMessageRequest) GetId() string {
 	return ""
 }
 
-// TODO: fix this logic (user_id, id musnt be change)
 type UpdateMessageRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
 	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,4,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -149,13 +147,6 @@ func (x *UpdateMessageRequest) GetId() string {
 		return x.Id
 	}
 	return ""
-}
-
-func (x *UpdateMessageRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
 }
 
 func (x *UpdateMessageRequest) GetContent() string {
@@ -340,6 +331,7 @@ type CreateMessageRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	ChatId        string                 `protobuf:"bytes,3,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -384,6 +376,13 @@ func (x *CreateMessageRequest) GetUserId() int64 {
 func (x *CreateMessageRequest) GetContent() string {
 	if x != nil {
 		return x.Content
+	}
+	return ""
+}
+
+func (x *CreateMessageRequest) GetChatId() string {
+	if x != nil {
+		return x.ChatId
 	}
 	return ""
 }
@@ -603,10 +602,9 @@ const file_message_proto_rawDesc = "" +
 	"\rmessage.proto\x12\amessage\x1a\x1fgoogle/protobuf/timestamp.proto\x1a google/protobuf/field_mask.proto\"\x17\n" +
 	"\x15DeleteMessageResponse\"&\n" +
 	"\x14DeleteMessageRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\x96\x01\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"}\n" +
 	"\x14UpdateMessageRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
 	"\acontent\x18\x03 \x01(\tR\acontent\x12;\n" +
 	"\vupdate_mask\x18\x04 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\";\n" +
@@ -620,10 +618,11 @@ const file_message_proto_rawDesc = "" +
 	"page_token\x18\x04 \x01(\tR\tpageToken\"c\n" +
 	"\x13ListMessageResponse\x12$\n" +
 	"\x04msgs\x18\x01 \x03(\v2\x10.message.MessageR\x04msgs\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"I\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"b\n" +
 	"\x14CreateMessageRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\";\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\x12\x17\n" +
+	"\achat_id\x18\x03 \x01(\tR\x06chatId\";\n" +
 	"\x15CreateMessageResponse\x12\"\n" +
 	"\x03msg\x18\x01 \x01(\v2\x10.message.MessageR\x03msg\"#\n" +
 	"\x11GetMessageRequest\x12\x0e\n" +

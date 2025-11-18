@@ -265,8 +265,6 @@ func (m *UpdateMessageRequest) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for UserId
-
 	// no validation rules for Content
 
 	if all {
@@ -782,6 +780,8 @@ func (m *CreateMessageRequest) validate(all bool) error {
 	// no validation rules for UserId
 
 	// no validation rules for Content
+
+	// no validation rules for ChatId
 
 	if len(errors) > 0 {
 		return CreateMessageRequestMultiError(errors)
