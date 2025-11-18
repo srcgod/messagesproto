@@ -524,6 +524,7 @@ type Message struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	ChatId        string                 `protobuf:"bytes,6,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -581,6 +582,13 @@ func (x *Message) GetContent() string {
 	return ""
 }
 
+func (x *Message) GetChatId() string {
+	if x != nil {
+		return x.ChatId
+	}
+	return ""
+}
+
 func (x *Message) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -628,11 +636,12 @@ const file_message_proto_rawDesc = "" +
 	"\x11GetMessageRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"8\n" +
 	"\x12GetMessageResponse\x12\"\n" +
-	"\x03msg\x18\x01 \x01(\v2\x10.message.MessageR\x03msg\"\xc2\x01\n" +
+	"\x03msg\x18\x01 \x01(\v2\x10.message.MessageR\x03msg\"\xdb\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\x129\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\x12\x17\n" +
+	"\achat_id\x18\x06 \x01(\tR\x06chatId\x129\n" +
 	"\n" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +

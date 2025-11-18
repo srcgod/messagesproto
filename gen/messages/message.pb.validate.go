@@ -1256,6 +1256,8 @@ func (m *Message) validate(all bool) error {
 
 	// no validation rules for Content
 
+	// no validation rules for ChatId
+
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
