@@ -212,7 +212,7 @@ type ListMessageRequest struct {
 	ChatId        string                 `protobuf:"bytes,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken     string                 `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	PageToken     *string                `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3,oneof" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -269,8 +269,8 @@ func (x *ListMessageRequest) GetPageSize() int32 {
 }
 
 func (x *ListMessageRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
+	if x != nil && x.PageToken != nil {
+		return *x.PageToken
 	}
 	return ""
 }
@@ -278,7 +278,7 @@ func (x *ListMessageRequest) GetPageToken() string {
 type ListMessageResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Msgs          []*Message             `protobuf:"bytes,1,rep,name=msgs,proto3" json:"msgs,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	NextPageToken *string                `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3,oneof" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -321,8 +321,8 @@ func (x *ListMessageResponse) GetMsgs() []*Message {
 }
 
 func (x *ListMessageResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
+	if x != nil && x.NextPageToken != nil {
+		return *x.NextPageToken
 	}
 	return ""
 }
@@ -617,16 +617,18 @@ const file_message_proto_rawDesc = "" +
 	"\vupdate_mask\x18\x04 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\";\n" +
 	"\x15UpdateMessageResponse\x12\"\n" +
-	"\x03msg\x18\x01 \x01(\v2\x10.message.MessageR\x03msg\"\x82\x01\n" +
+	"\x03msg\x18\x01 \x01(\v2\x10.message.MessageR\x03msg\"\x96\x01\n" +
 	"\x12ListMessageRequest\x12\x17\n" +
 	"\achat_id\x18\x01 \x01(\tR\x06chatId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\"\n" +
 	"\n" +
-	"page_token\x18\x04 \x01(\tR\tpageToken\"c\n" +
+	"page_token\x18\x04 \x01(\tH\x00R\tpageToken\x88\x01\x01B\r\n" +
+	"\v_page_token\"|\n" +
 	"\x13ListMessageResponse\x12$\n" +
-	"\x04msgs\x18\x01 \x03(\v2\x10.message.MessageR\x04msgs\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"b\n" +
+	"\x04msgs\x18\x01 \x03(\v2\x10.message.MessageR\x04msgs\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tH\x00R\rnextPageToken\x88\x01\x01B\x12\n" +
+	"\x10_next_page_token\"b\n" +
 	"\x14CreateMessageRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x17\n" +
@@ -712,6 +714,8 @@ func file_message_proto_init() {
 	if File_message_proto != nil {
 		return
 	}
+	file_message_proto_msgTypes[4].OneofWrappers = []any{}
+	file_message_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -535,7 +535,9 @@ func (m *ListMessageRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	// no validation rules for PageToken
+	if m.PageToken != nil {
+		// no validation rules for PageToken
+	}
 
 	if len(errors) > 0 {
 		return ListMessageRequestMultiError(errors)
@@ -673,7 +675,9 @@ func (m *ListMessageResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for NextPageToken
+	if m.NextPageToken != nil {
+		// no validation rules for NextPageToken
+	}
 
 	if len(errors) > 0 {
 		return ListMessageResponseMultiError(errors)

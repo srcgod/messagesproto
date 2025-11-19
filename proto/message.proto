@@ -36,12 +36,12 @@ message ListMessageRequest {
     string chat_id = 1;
     int64 user_id = 2;
     int32 page_size = 3;
-    string page_token = 4;
+    optional string page_token = 4;
 }
 
 message ListMessageResponse {
     repeated Message msgs = 1;
-    string next_page_token = 2;
+    optional string next_page_token = 2;
 }
 
 message CreateMessageRequest {
