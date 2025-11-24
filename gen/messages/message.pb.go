@@ -332,6 +332,7 @@ type CreateMessageRequest struct {
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
 	ChatId        string                 `protobuf:"bytes,3,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
+	MessageType   *string                `protobuf:"bytes,4,opt,name=message_type,json=messageType,proto3,oneof" json:"message_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -383,6 +384,13 @@ func (x *CreateMessageRequest) GetContent() string {
 func (x *CreateMessageRequest) GetChatId() string {
 	if x != nil {
 		return x.ChatId
+	}
+	return ""
+}
+
+func (x *CreateMessageRequest) GetMessageType() string {
+	if x != nil && x.MessageType != nil {
+		return *x.MessageType
 	}
 	return ""
 }
@@ -527,6 +535,8 @@ type Message struct {
 	ChatId        string                 `protobuf:"bytes,6,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	MessageType   *string                `protobuf:"bytes,7,opt,name=message_type,json=messageType,proto3,oneof" json:"message_type,omitempty"`
+	Status        string                 `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -603,6 +613,20 @@ func (x *Message) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *Message) GetMessageType() string {
+	if x != nil && x.MessageType != nil {
+		return *x.MessageType
+	}
+	return ""
+}
+
+func (x *Message) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
 var File_message_proto protoreflect.FileDescriptor
 
 const file_message_proto_rawDesc = "" +
@@ -628,17 +652,19 @@ const file_message_proto_rawDesc = "" +
 	"\x13ListMessageResponse\x12$\n" +
 	"\x04msgs\x18\x01 \x03(\v2\x10.message.MessageR\x04msgs\x12+\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tH\x00R\rnextPageToken\x88\x01\x01B\x12\n" +
-	"\x10_next_page_token\"b\n" +
+	"\x10_next_page_token\"\x9b\x01\n" +
 	"\x14CreateMessageRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x17\n" +
-	"\achat_id\x18\x03 \x01(\tR\x06chatId\";\n" +
+	"\achat_id\x18\x03 \x01(\tR\x06chatId\x12&\n" +
+	"\fmessage_type\x18\x04 \x01(\tH\x00R\vmessageType\x88\x01\x01B\x0f\n" +
+	"\r_message_type\";\n" +
 	"\x15CreateMessageResponse\x12\"\n" +
 	"\x03msg\x18\x01 \x01(\v2\x10.message.MessageR\x03msg\"#\n" +
 	"\x11GetMessageRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"8\n" +
 	"\x12GetMessageResponse\x12\"\n" +
-	"\x03msg\x18\x01 \x01(\v2\x10.message.MessageR\x03msg\"\xdb\x01\n" +
+	"\x03msg\x18\x01 \x01(\v2\x10.message.MessageR\x03msg\"\xac\x02\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x18\n" +
@@ -647,7 +673,10 @@ const file_message_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\x91\x03\n" +
+	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
+	"\fmessage_type\x18\a \x01(\tH\x00R\vmessageType\x88\x01\x01\x12\x16\n" +
+	"\x06status\x18\b \x01(\tR\x06statusB\x0f\n" +
+	"\r_message_type2\x91\x03\n" +
 	"\x0eMessageService\x12E\n" +
 	"\n" +
 	"GetMessage\x12\x1a.message.GetMessageRequest\x1a\x1b.message.GetMessageResponse\x12N\n" +
@@ -716,6 +745,8 @@ func file_message_proto_init() {
 	}
 	file_message_proto_msgTypes[4].OneofWrappers = []any{}
 	file_message_proto_msgTypes[5].OneofWrappers = []any{}
+	file_message_proto_msgTypes[6].OneofWrappers = []any{}
+	file_message_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

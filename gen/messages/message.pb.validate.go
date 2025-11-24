@@ -787,6 +787,10 @@ func (m *CreateMessageRequest) validate(all bool) error {
 
 	// no validation rules for ChatId
 
+	if m.MessageType != nil {
+		// no validation rules for MessageType
+	}
+
 	if len(errors) > 0 {
 		return CreateMessageRequestMultiError(errors)
 	}
@@ -1318,6 +1322,12 @@ func (m *Message) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	// no validation rules for Status
+
+	if m.MessageType != nil {
+		// no validation rules for MessageType
 	}
 
 	if len(errors) > 0 {
